@@ -144,20 +144,11 @@
         }),
       })
       .then(response => response.json())
-    //   .then(data => {
-    //     const result = document.getElementById('predictionResult');
-    //     if (data.predicted_crop) {
-    //       result.innerText = `🌾 Predicted Crop: ${data.predicted_crop}`;
-    //     } else {
-    //       result.innerText = '⚠️ Error retrieving prediction.';
-    //     }
-    //   })
        .then(data => {
     const resultDiv = document.getElementById('predictionResult');
     if (data.predicted_crop) {
         resultDiv.innerText = `🌾 Predicted Crop: ${data.predicted_crop}`;
-        
-        // Save to localStorage properly with all values including predicted_crop
+      
         const history = JSON.parse(localStorage.getItem('history')) || [];
         history.push({
             date: new Date().toLocaleString(),
@@ -175,7 +166,6 @@
         resultDiv.innerText = '⚠️ Error retrieving prediction.';
     }
 })
-
       .catch(error => {
         console.error('Error:', error);
         document.getElementById('predictionResult').innerText = '⚠️ Server error or invalid response.';
