@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prediction Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #bbe6bb;
+      color: #333;
+      text-align: center;
+    }
+    
+
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 20px 0;
+      font-size: 1.8em;
+    }
+
+    .calculator-container {
+      background-color: white;
+      margin: 30px auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      text-align: left;
+    }
+
+    .calculator-container label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .calculator-container input[type="number"] {
+      width: calc(100% - 22px);
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .calculator-container button {
+      background-color: #66bb6a;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1.1em;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      width: 100%;
+    }
+
+    .calculator-container button:hover {
+      background-color: #4CAF50;
+    }
+
+    .prediction-result {
+      margin-top: 20px;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #007bff;
+    }
+
+    .back-button {
+      background-color: #66bb6a;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 20px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Farming Prediction Calculator</h1>
+  </header>
+
+  <div class="calculator-container">
+    <h2>🌱 Enter Soil and Climate Data</h2>
+    <form id="predictionForm">
+      <label for="N">Nitrogen (N):</label>
+      <input type="number" id="N" name="N" required>
+
+      <label for="P">Phosphorus (P):</label>
+      <input type="number" id="P" name="P" required>
+
+      <label for="K">Potassium (K):</label>
+      <input type="number" id="K" name="K" required>
+
+      <label for="temperature">Temperature (°C):</label>
+      <input type="number" id="temperature" name="temperature" required>
+
+      <label for="humidity">Humidity (%):</label>
+      <input type="number" id="humidity" name="humidity" required>
+
+      <label for="ph">pH Value:</label>
+      <input type="number" id="ph" name="ph" step="0.1" required>
+
+      <label for="rainfall">Rainfall (mm):</label>
+      <input type="number" id="rainfall" name="rainfall" required>
+
+      <button type="submit">🌾 Get Crop Prediction</button>
+    </form>
+    <div class="prediction-result" id="predictionResult"></div>
+  </div>
+
+  <a href="index.html" class="back-button">⬅️ Back to Home</a>
+
+  <script>
+    document.getElementById('predictionForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      fetch('/predict-farming', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          N: document.getElementById('N').value,
+          P: document.getElementById('P').value,
+          K: document.getElementById('K').value,
+          temperature: document.getElementById('temperature').value,
+          humidity: document.getElementById('humidity').value,
+          ph: document.getElementById('ph').value,
+          rainfall: document.getElementById('rainfall').value
+        }),
+      })
+      .then(response => response.json())
+    //   .then(data => {
+    //     const result = document.getElementById('predictionResult');
+    //     if (data.predicted_crop) {
+    //       result.innerText = `🌾 Predicted Crop: ${data.predicted_crop}`;
+    //     } else {
+    //       result.innerText = '⚠️ Error retrieving prediction.';
+    //     }
+    //   })
+       .then(data => {
+    const resultDiv = document.getElementById('predictionResult');
+    if (data.predicted_crop) {
+        resultDiv.innerText = `🌾 Predicted Crop: ${data.predicted_crop}`;
+        
+        // Save to localStorage properly with all values including predicted_crop
+        const history = JSON.parse(localStorage.getItem('history')) || [];
+        history.push({
+            date: new Date().toLocaleString(),
+            N: document.getElementById('N').value,
+            P: document.getElementById('P').value,
+            K: document.getElementById('K').value,
+            humidity: document.getElementById('humidity').value + '%',
+            temperature: document.getElementById('temperature').value + '°C',
+            ph: document.getElementById('ph').value,
+            rainfall: document.getElementById('rainfall').value + ' mm',
+            predicted_crop: data.predicted_crop
+        });
+        localStorage.setItem('history', JSON.stringify(history));
+    } else {
+        resultDiv.innerText = '⚠️ Error retrieving prediction.';
+    }
+})
+
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById('predictionResult').innerText = '⚠️ Server error or invalid response.';
+      });
+    });
+  </script>
+
+</body>
+</html>

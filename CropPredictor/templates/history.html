@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prediction History</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #dce35b, #45b649);
+      margin: 0;
+      padding: 0;
+      color: #333;
+      text-align: center;
+    }
+
+    header {
+      background-color: #388e3c;
+      color: white;
+      padding: 25px 0;
+      font-size: 2em;
+    }
+
+    .history-container {
+      background-color: white;
+      margin: 40px auto;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 1000px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      text-align: center;
+    }
+
+    th {
+      background-color: #e0f2f1;
+      color: #00695c;
+    }
+
+    .no-history {
+      color: #777;
+      font-style: italic;
+      margin-top: 20px;
+    }
+
+    .back-button {
+      margin-top: 30px;
+      background-color: #66bb6a;
+      padding: 10px 20px;
+      text-decoration: none;
+      color: white;
+      border-radius: 5px;
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #388e3c;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    Prediction History 🌾
+  </header>
+
+  <div class="history-container">
+    
+        <table id="history-table" border="1" style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr>
+      <th>Date & Time</th>
+      <th>Nitrogen (N)</th>
+      <th>Phosphorus (P)</th>
+      <th>Potassium (K)</th>
+      <th>Humidity</th>
+      <th>Temperature</th>
+      <th>pH Value</th>
+      <th>Rainfall</th>
+      <th>Predicted Crop</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- JS will insert rows here -->
+  </tbody>
+</table>
+
+        <!-- History will be inserted here -->
+      </tbody>
+    </table>
+    <p id="noHistoryMessage" class="no-history" style="display:none;">No prediction history available.</p>
+  </div>
+
+  <a href="index.html" class="back-button">⬅️ Back to Home</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const history = JSON.parse(localStorage.getItem('farmingHistory')) || [];
+      const tbody = document.querySelector('#historyTable tbody');
+      const noHistory = document.getElementById('noHistoryMessage');
+
+       window.addEventListener('DOMContentLoaded', () => {
+  const history = JSON.parse(localStorage.getItem('history')) || [];
+  const tbody = document.getElementById('history-table').getElementsByTagName('tbody')[0];
+
+  history.forEach(entry => {
+    const row = tbody.insertRow();
+    row.insertCell(0).innerText = entry.date;
+    row.insertCell(1).innerText = entry.N;
+    row.insertCell(2).innerText = entry.P;
+    row.insertCell(3).innerText = entry.K;
+    row.insertCell(4).innerText = entry.humidity;
+    row.insertCell(5).innerText = entry.temperature;
+    row.insertCell(6).innerText = entry.ph;
+    row.insertCell(7).innerText = entry.rainfall;
+    row.insertCell(8).innerText = entry.predicted_crop;
+  });
+});
+
+
+    });
+  </script>
+      
+
+</body>
+</html>
