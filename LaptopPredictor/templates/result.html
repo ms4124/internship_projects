@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Predicted Price:</h1>
+    <p style="font-size: 24px;">₹ {{ price }}</p>
+    <a href="/" style="color: #00adb5;">Predict another</a>
+  </div>
+</body>
+</html>

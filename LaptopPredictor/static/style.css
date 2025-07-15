@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Orbitron', sans-serif;
+  background: linear-gradient(-45deg, #1f1c2c, #928dab, #2c3e50, #bdc3c7);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+  color: #fff;
+}
+
+@keyframes gradientBG {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+.container {
+  max-width: 600px;
+  margin: 5vh auto;
+  padding: 30px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 16px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 32px;
+}
+
+.form input, .form select {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #00adb5;
+  color: white;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background-color: #007d85;
+}
+
+.mohit-label {
+  position: fixed;
+  bottom: 10px;
+  right: 15px;
+  font-size: 14px;
+  color: #ffffffcc;
+  font-family: 'Courier New', Courier, monospace;
+}
