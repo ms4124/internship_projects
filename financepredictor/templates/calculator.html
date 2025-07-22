@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Insurance Calculator</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+    }
+    .container {
+      max-width: 500px;
+      margin: 5% auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      color: #0072ff;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      margin-top: 10px;
+      font-weight: 600;
+    }
+    input, select {
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #0072ff;
+      color: white;
+      font-size: 1rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005ecc;
+    }
+    .result {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    footer {
+      text-align: right;
+      font-size: 0.9rem;
+      color: #f0f0f0;
+      margin-top: 40px;
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+<body>
+<div class="form-container">
+  <h2>Insurance Charges Predictor</h2>
+  <form method="POST" action="/predict">
+    <label>Age:</label>
+    <input type="number" name="age" required>
+
+    <label>Sex:</label>
+    <select name="sex" required>
+      <option value="0">Female</option>
+      <option value="1">Male</option>
+    </select>
+
+    <label>BMI:</label>
+    <input type="text" name="bmi" required>
+
+    <label>Children:</label>
+    <input type="number" name="children" required>
+
+    <label>Smoker:</label>
+    <select name="smoker" required>
+      <option value="0">No</option>
+      <option value="1">Yes</option>
+    </select>
+
+    <label>Region:</label>
+    <select name="region" required>
+      <option value="0">Region 0</option>
+      <option value="1">Region 1</option>
+      <option value="2">Region 2</option>
+      <option value="3">Region 3</option>
+    </select>
+
+    <button type="submit" class="predict-btn">Predict</button>
+  </form>
+
+{% if prediction %}
+    <div class="result">
+      <h3>Predicted Charges: ${{ prediction }}</h3>
+    </div>
+  {% endif %}
+</div>
+
+
+
+  </div>
+  <footer>MADE BY MOHIT</footer>
+</body>
+</html>

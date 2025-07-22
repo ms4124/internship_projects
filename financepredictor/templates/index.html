@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calculator</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="form-bg">
+  <div class="form-container animate-slide-in">
+    <h2>Insurance Charges Predictor</h2>
+    <form method="POST">
+      <label>Age:</label><input name="age" type="number" required>
+      <label>Sex:</label>
+      <select name="sex">
+        <option value="0">Female</option>
+        <option value="1">Male</option>
+      </select>
+      <label>BMI:</label><input name="bmi" type="number" step="any" required>
+      <label>Children:</label><input name="children" type="number" required>
+      <label>Smoker:</label>
+      <select name="smoker">
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+      <label>Region:</label>
+      <select name="region">
+        <option value="0">Region 0</option>
+        <option value="1">Region 1</option>
+        <option value="2">Region 2</option>
+        <option value="3">Region 3</option>
+      </select>
+      <button type="submit" class="glow-btn">Predict</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">Predicted Charges: ₹ {{ prediction }}</div>
+    {% endif %}
+  </div>
+  <footer>MADE BY MOHIT</footer>
+</body>
+</html>
+
