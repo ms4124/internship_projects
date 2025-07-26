@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ollama Chat (Gemma)</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>💬 Ask Gemma (via Ollama)</h1>
+    <form method="POST">
+      <textarea name="prompt" rows="4" placeholder="Ask something...">{{ prompt }}</textarea>
+      <input type="submit" value="Send" />
+    </form>
+
+    {% if response %}
+      <div class="response-box">
+        <strong>Gemma says:</strong><br>{{ response }}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
