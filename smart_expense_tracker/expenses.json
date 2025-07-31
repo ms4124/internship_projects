@@ -1,0 +1,14 @@
+[
+    {
+        "amount": 10.0,
+        "category": "Food",
+        "note": "panipuri",
+        "date": "2025-07-31 15:46"
+    },
+    {
+        "amount": 100.0,
+        "category": "Medical",
+        "note": "Head ache",
+        "date": "2025-07-31 18:58"
+    }
+]

@@ -1,0 +1,20 @@
+[
+  {
+    "amount": 500,
+    "category": "Food",
+    "note": "Dinner",
+    "date": "2025-07-01 19:30"
+  },
+  {
+    "amount": 1200,
+    "category": "Travel",
+    "note": "Cab",
+    "date": "2025-07-03 09:00"
+  },
+  {
+    "amount": 700,
+    "category": "Medical",
+    "note": "Medicine",
+    "date": "2025-07-04 10:30"
+  }
+]
